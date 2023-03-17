@@ -3,11 +3,13 @@ package game2023;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
-public class Game extends Canvas implements Runnable {
+public class Game extends Canvas implements Runnable, KeyListener {
 
     public static final int WIDTH = 160;
     public static final int HEIGHT = 120;
@@ -19,7 +21,7 @@ public class Game extends Canvas implements Runnable {
     // construtor
     public Game(){
          this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
-         player = new Player();
+         player = new Player(65, HEIGHT-5);
     }
     public static void main(String[] args) {
         JFrame frame = new JFrame("PING PONG 2023");
@@ -65,6 +67,23 @@ public class Game extends Canvas implements Runnable {
                 System.out.println("Erro: "+ ex.getMessage());
             }
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+             player.right = true;
+         }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
