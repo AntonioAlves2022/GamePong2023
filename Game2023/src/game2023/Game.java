@@ -1,20 +1,56 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package game2023;
 
-/**
- *
- * @author ANTONIO
- */
-public class Game {
+import java.awt.Canvas;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import javax.swing.JFrame;
 
-    /**
-     * @param args the command line arguments
-     */
+public class Game extends Canvas implements Runnable {
+
+    public static final int WIDTH = 160;
+    public static final int HEIGHT = 120;
+    public static final int SCALE = 4;
+    public BufferedImage layer = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+    
+    //  public static Player player;
+    
+    // construtor
+    public Game(){
+         this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
+         // player = new Player();
+    }
     public static void main(String[] args) {
-        // TODO code application logic here
+        JFrame frame = new JFrame("PING PONG 2023");
+        Game game = new Game();
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(game);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);    
     }
     
+    void render(){
+        
+    }
+    
+    void tick(){
+        
+    }
+    
+    
+    @Override
+    public void run() {
+        while(true){
+            tick();
+            render();
+            
+            try{
+               Thread.sleep(1000/60);
+            }catch(InterruptedException ex){
+                System.out.println("Erro: "+ ex.getMessage());
+            }
+        }
+    }
+
 }
