@@ -14,12 +14,12 @@ public class Game extends Canvas implements Runnable {
     public static final int SCALE = 4;
     public BufferedImage layer = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     
-    //  public static Player player;
+    public static Player player;
     
     // construtor
     public Game(){
          this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
-         // player = new Player();
+         player = new Player();
     }
     public static void main(String[] args) {
         JFrame frame = new JFrame("PING PONG 2023");
@@ -42,7 +42,7 @@ public class Game extends Canvas implements Runnable {
         }
         
         Graphics g = layer.getGraphics();
-        // player.render(g);
+        player.render(g);
         g = bs.getDrawGraphics();
         g.drawImage(layer, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
         bs.show();
