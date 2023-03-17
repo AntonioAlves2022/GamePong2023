@@ -1,6 +1,7 @@
 package game2023;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -21,7 +22,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
     // construtor
     public Game(){
          this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
-         player = new Player(65, HEIGHT-5);
+         player = new Player(100, HEIGHT-5);
+         this.addKeyListener(this);
+         
     }
     public static void main(String[] args) {
         JFrame frame = new JFrame("PING PONG 2023");
@@ -44,6 +47,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
         }
         
         Graphics g = layer.getGraphics();
+        g.setColor(Color.black);
+        g.fillRect(0,0, WIDTH, HEIGHT);
         player.render(g);
         g = bs.getDrawGraphics();
         g.drawImage(layer, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
@@ -51,7 +56,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     }
     
     void tick(){
-        
+       player.tick();
     }
     
     
@@ -78,12 +83,18 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public void keyPressed(KeyEvent e) {
          if(e.getKeyCode() == KeyEvent.VK_RIGHT){
              player.right = true;
+         }else if(e.getKeyCode() == KeyEvent.VK_LEFT){
+             player.left = true;
          }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+            player.right = false;
+        }else if(e.getKeyCode() == KeyEvent.VK_LEFT){
+            player.left = false;
+        }
     }
 
 }
